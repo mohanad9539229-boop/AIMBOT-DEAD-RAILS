@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Download | Modern Dark</title>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --glass: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        /* حاوية الفيديو */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* طبقة التعتيم لجعل النص واضحاً */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* يمكنك زيادة الرقم لزيادة الظلام */
+            z-index: -1;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(to bottom, #ff4d4d, #8b0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-download {
+            margin-top: 30px;
+            padding: 15px 50px;
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--primary-red);
+            background: transparent;
+            border-color: var(--primary-red);
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+            box-shadow: 0 0 10px #00ff00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-loop-2469-large.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="main-content">
+        <div class="glass-card">
+            <h1>DELTA</h1>
+            <p style="color: #ccc; margin-top: 10px;">The Most Advanced Roblox Executor</p>
+            
+            <div style="margin: 20px 0;">
+                <span class="status-dot"></span>
+                <span>الحالة: متصل وتعمل النسخة الأخيرة</span>
+            </div>
+
+            <p>أداء مستقر، واجهة عصرية، ودعم كامل لكافة السكريبتات.</p>
+
+            <a href="رابط_التحميل_هنا" class="btn-download">تحميل مجاني</a>
+        </div>
+    </div>
+
+</body>
+</html>
