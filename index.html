@@ -2,144 +2,135 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delta Download | Modern Dark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Delta Executor | Northern Blade Edition</title>
     <style>
         :root {
-            --primary-red: #cc0000;
-            --glass: rgba(255, 255, 255, 0.07);
-            --border: rgba(255, 255, 255, 0.1);
+            --red-bright: #ff0000;
+            --red-dark: #660000;
+            --glass: rgba(0, 0, 0, 0.75);
         }
 
-        body, html {
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
             margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
+            background-color: #000;
             color: white;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* حاوية الفيديو */
-        .video-background {
+        .video-container {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+        }
+
+        video {
             width: 100%;
             height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            object-fit: cover; /* لضمان ملء الشاشة تماماً */
+            filter: brightness(0.4) contrast(1.1);
         }
 
-        .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        /* طبقة التعتيم لجعل النص واضحاً */
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* يمكنك زيادة الرقم لزيادة الظلام */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
             z-index: -1;
         }
 
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .glass-card {
+        /* تصميم البطاقة */
+        .card {
             background: var(--glass);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 35px;
+            padding: 40px 25px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            animation: fadeIn 1s ease-in;
         }
 
-        h1 {
-            font-size: 3.5rem;
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .title {
+            font-size: 2.2rem;
+            font-weight: 900;
             margin: 0;
-            background: linear-gradient(to bottom, #ff4d4d, #8b0000);
+            background: linear-gradient(to right, #fff, #ff0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff88;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin: 15px 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .dot { height: 8px; width: 8px; background: #00ff88; border-radius: 50%; margin-left: 8px; box-shadow: 0 0 10px #00ff88; }
 
         .btn-download {
-            margin-top: 30px;
-            padding: 15px 50px;
-            background: var(--primary-red);
+            display: block;
+            background: linear-gradient(45deg, var(--red-dark), var(--red-bright));
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            padding: 18px;
+            border-radius: 20px;
             font-weight: bold;
-            display: inline-block;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
         }
 
-        .btn-download:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px var(--primary-red);
-            background: transparent;
-            border-color: var(--primary-red);
-        }
+        .btn-download:active { transform: scale(0.95); }
 
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-block;
-            margin-left: 10px;
-            box-shadow: 0 0 10px #00ff00;
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
 
-    <div class="video-background">
+    <div class="video-container">
         <video autoplay muted loop playsinline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-loop-2469-large.mp4" type="video/mp4">
+            <source src="https://cdn.discordapp.com/attachments/1276070423234351187/1503730018851753984/snapvideo--Goat.__Legend_of_Northern_Blade_manhwaedit_manhwa_legendofnorthernblade_fyp_lamun77_-.mov?ex=6a046936&is=6a0317b6&hm=68aaf06cf6e505b87af955e01af7aa1bc7a8e80181075dbceca89aac95efe023&" type="video/quicktime">
+            Your browser does not support the video tag.
         </video>
     </div>
     <div class="overlay"></div>
 
-    <div class="main-content">
-        <div class="glass-card">
-            <h1>DELTA</h1>
-            <p style="color: #ccc; margin-top: 10px;">The Most Advanced Roblox Executor</p>
-            
-            <div style="margin: 20px 0;">
-                <span class="status-dot"></span>
-                <span>الحالة: متصل وتعمل النسخة الأخيرة</span>
-            </div>
-
-            <p>أداء مستقر، واجهة عصرية، ودعم كامل لكافة السكريبتات.</p>
-
-            <a href="رابط_التحميل_هنا" class="btn-download">تحميل مجاني</a>
+    <div class="card">
+        <h1 class="title">DELTA</h1>
+        <div class="status-badge">
+            <span class="dot"></span>
+            V2.64 | يعمل بنجاح
         </div>
+        <p style="line-height: 1.6;">استمتع بتشغيل سكريبتاتك المفضلة بأعلى استقرار. تصميم خاص لمحبي مانهوا <b>Northern Blade</b>.</p>
+        
+        <a href="ضع_رابط_التحميل_هنا" class="btn-download">تحميل دلتا (Mobile)</a>
+        
+        <p class="footer-text">تطوير بواسطة SLAX HUB</p>
     </div>
 
 </body>
