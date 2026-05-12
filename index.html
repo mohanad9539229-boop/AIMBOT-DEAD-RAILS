@@ -9,8 +9,8 @@
         :root {
             --red: #ff0000;
             --dark-red: #8b0000;
-            --glass: rgba(10, 10, 10, 0.8);
-            --border: rgba(255, 0, 0, 0.25);
+            --glass: rgba(10, 10, 10, 0.85);
+            --border: rgba(255, 0, 0, 0.3);
         }
 
         * { 
@@ -43,26 +43,26 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            filter: brightness(0.45) contrast(1.1); 
+            filter: brightness(0.4) contrast(1.2); 
         }
 
         .overlay { 
             position: fixed; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: radial-gradient(circle, transparent 10%, rgba(0,0,0,0.85) 100%); 
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%); 
             z-index: -1; 
         }
 
-        /* زر التحكم بالصوت الاحترافي */
+        /* زر التحكم بالصوت */
         .audio-toggle {
             position: fixed; 
-            top: 30px; 
-            right: 30px;
-            width: 50px; height: 50px;
+            top: 25px; 
+            right: 25px;
+            width: 45px; height: 45px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 12px;
             display: flex; 
             align-items: center; 
             justify-content: center;
@@ -74,118 +74,98 @@
         .audio-toggle:active { transform: scale(0.9); }
 
         .speaker-box {
-            width: 22px; height: 16px; 
+            width: 20px; height: 15px; 
             display: flex; 
             align-items: center; 
             position: relative;
         }
 
-        .speaker-body {
-            width: 7px; height: 8px; 
-            background: white; 
-            position: relative;
-            z-index: 2;
-        }
+        .speaker-body { width: 6px; height: 7px; background: white; position: relative; z-index: 2; }
+        .speaker-head { width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right: 11px solid white; margin-left: -1px; }
+        .mute-line { position: absolute; width: 25px; height: 2px; background: var(--red); transform: rotate(45deg); z-index: 10; border-radius: 2px; transition: 0.2s; }
 
-        .speaker-head {
-            width: 0; height: 0; 
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-right: 12px solid white;
-            margin-left: -1px;
-        }
-
-        .mute-line {
-            position: absolute; 
-            width: 28px; height: 2px; 
-            background: var(--red);
-            transform: rotate(45deg); 
-            z-index: 10; 
-            border-radius: 2px;
-            transition: 0.2s;
-        }
-
-        /* الكارد الزجاجي (Glassmorphism) */
+        /* الكارد الزجاجي */
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            border-radius: 40px; 
-            padding: 50px 25px;
+            border-radius: 35px; 
+            padding: 40px 25px;
             width: 90%; 
             max-width: 380px; 
             text-align: center;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            animation: fadeIn 1s ease-out;
         }
 
-        /* تحسين النصوص */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         .title {
-            font-size: 3rem; 
+            font-size: 3.5rem; 
             font-weight: 900; 
             margin: 0;
-            background: linear-gradient(180deg, #fff 40%, var(--red) 100%);
+            background: linear-gradient(180deg, #fff 30%, var(--red) 100%);
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
-            text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
         .status-badge {
             display: inline-flex; 
             align-items: center;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(0, 255, 100, 0.05);
             color: #00ff64; 
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 50px; 
-            font-size: 0.8rem; 
+            font-size: 0.75rem; 
             font-weight: bold;
-            margin: 20px 0; 
+            margin: 15px 0 25px 0; 
             border: 1px solid rgba(0, 255, 100, 0.2);
-            letter-spacing: 0.5px;
         }
 
         .dot { 
-            height: 8px; width: 8px; 
+            height: 7px; width: 7px; 
             background: #00ff64; 
             border-radius: 50%; 
-            margin-left: 10px; 
-            box-shadow: 0 0 15px #00ff64; 
+            margin-left: 8px; 
+            box-shadow: 0 0 10px #00ff64; 
             animation: blink 1.2s infinite; 
         }
 
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .desc { 
-            font-size: 1.05rem; 
-            color: #e0e0e0; 
-            line-height: 1.6; 
-            margin-bottom: 30px;
-        }
+        .desc { font-size: 1rem; color: #ccc; line-height: 1.5; margin-bottom: 30px; }
 
-        /* الزر الرئيسي */
+        /* الزر الرئيسي مع تأثير النبض */
         .btn-main {
             display: block; 
             background: linear-gradient(90deg, var(--dark-red), var(--red));
             color: white; 
             text-decoration: none; 
-            padding: 20px;
-            border-radius: 20px; 
+            padding: 18px;
+            border-radius: 18px; 
             font-weight: 800; 
-            font-size: 1.2rem;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
-            letter-spacing: 1px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+            animation: pulse 2s infinite;
         }
 
-        .btn-main:active { transform: scale(0.95); }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        .btn-main:active { transform: scale(0.96); }
 
         .footer { 
-            margin-top: 30px; 
-            font-size: 0.75rem; 
-            color: #777; 
+            margin-top: 25px; 
+            font-size: 0.7rem; 
+            color: #666; 
             font-weight: bold;
-            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .footer span { color: var(--red); }
@@ -193,7 +173,7 @@
 </head>
 <body>
 
-    <div class="audio-toggle" onclick="toggleAudio()" title="تشغيل/إيقاف الصوت">
+    <div class="audio-toggle" onclick="toggleAudio()">
         <div class="speaker-box">
             <div class="speaker-body"></div>
             <div class="speaker-head"></div>
@@ -213,12 +193,12 @@
         
         <div class="status-badge">
             <span class="dot"></span>
-            IPA V2.64 | ONLINE
+            IPA V2.720 | ONLINE
         </div>
 
-        <p class="desc">استمتع بتشغيل سكريبتاتك المفضلة بأعلى استقرار</p>
+        <p class="desc">استمتع بتشغيل سكريبتاتك المفضلة بأعلى استقرار وأداء على أجهزة الـ iOS</p>
         
-        <a href="https://github.com/mohanad9539229-boop/AIMBOT-DEAD-RAILS/releases/download/v2.720/Delta-2.720.1164." class="btn-main">DOWNLOAD IPA</a>
+        <a href="https://github.com/mohanad9539229-boop/AIMBOT-DEAD-RAILS/releases/download/v2.720/Delta-2.720.1164.ipa" class="btn-main">DOWNLOAD IPA</a>
         
         <p class="footer">🗡️ NORTHERN BLADE IS THE <span>GOAT</span></p>
     </div>
